@@ -23,6 +23,6 @@ urlpatterns = [
     path('category/edit/<slug>/', views.categoryUpdate, name='category-edit' ),
     path('category/delete/<slug>/', views.categoryDelete, name='category-delete' ),
 
-    path('category/<slug>/subcategories/', views.subCategoryList, name='subcategories' ),
+    path('category/<slug>/', views.subCategoryList, name='subcategories' ),
     path('category/<slug>/create/', views.subCategoryCreate, name='subcategory-create' ),
 ]

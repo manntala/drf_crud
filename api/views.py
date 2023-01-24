@@ -5,7 +5,7 @@ from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from . serializers import ProductSerializer, CategorySerializer
+from . serializers import ProductSerializer, CategorySerializer, SubCategorySerializer
 
 from products.models import Product, Category, SubCategory
 
@@ -114,8 +114,9 @@ def categoryDelete(request, slug):
 @api_view(['GET'])
 def subCategoryList(request, slug):
     category = Category.objects.get(slug=slug)
-    subcategory = SubCategory.objects.get(category=slug)
-    serializer = SubCategorySerializer(subcategory, many=False)
+    # subcategory = SubCategory.objects.get(category=slug)
+    subcategory = category.subcategory_set.all()
+    serializer = SubCategorySerializer(subcategory, many=True)
     return Response(serializer.data)
 
 
