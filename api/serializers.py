@@ -3,6 +3,7 @@ from products.models import Product, Category, SubCategory
 
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
+        lookup_field = 'slug'
         model = Product
         fields = '__all__'
 

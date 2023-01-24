@@ -1,28 +1,15 @@
 from django.urls import path
 from . import views
 
-    #/products -> GET: list all products, paginated
-    #/products/create/ ->POST: create new product
-    #/products/<slug> -> GET, PATCH, PUT, DELETE: view, edit and delete product
-
-    # /categories -> GET: list all products, paginated
-    # /categories/create/ -> POST: create new category
-    # /categories/<slug> -> GET, PATCH, PUT, DELETE: view, edit and delete category
-
 urlpatterns = [
-    path('', views.apiOverview, name='api-overview' ),
-    path('products/', views.productList, name='products' ),
-    path('product/detail/<slug>/', views.productDetail, name='product-detail' ),
-    path('product/create/', views.productCreate, name='product-create' ),
-    path('product/edit/<slug>/', views.productUpdate, name='product-edit' ),
-    path('product/delete/<slug>/', views.productDelete, name='product-delete' ),
+    path('products/', views.ListProductsViews.as_view(), name='list-products-views'),
+    path('products/create/', views.CreateProductViews.as_view(), name='create-products-views'),
+    path('products/<slug:slug>/', views.DetailProductViews.as_view(), name='detail-products-views'),
 
-    path('categories/', views.categoryList, name='categories' ),
-    path('category/detail/<slug>/', views.categoryDetail, name='category-detail' ),
-    path('category/create/', views.categoryCreate, name='category-create' ),
-    path('category/edit/<slug>/', views.categoryUpdate, name='category-edit' ),
-    path('category/delete/<slug>/', views.categoryDelete, name='category-delete' ),
+    path('categories/', views.ListCategoriesViews.as_view(), name='list-categories-views'),
+    path('categories/create/', views.CreateCategoriesViews.as_view(), name='create-categories-views'),
+    path('categories/<slug:slug>/', views.DetailCategoriesViews.as_view(), name='detail-categories-views'),
 
-    path('category/<slug>/', views.subCategoryList, name='subcategories' ),
-    path('category/<slug>/create/', views.subCategoryCreate, name='subcategory-create' ),
+    path('categories/<slug:slug>/subcategories/', views.ListSubCategoriesViews.as_view(), name='list-subcategories-views'),
+    path('categories/<slug:slug>/create/', views.CreateSubCategoriesViews.as_view(), name='create-subcategories-views'),
 ]
